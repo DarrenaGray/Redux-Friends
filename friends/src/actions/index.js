@@ -36,9 +36,6 @@ export const getFriends = () => dispatch => {
         })
         .catch(err => {
             console.log(err.response)
-            if (err.response.status === 403) {
-                localStorage.removeItem('token');
-            }
             dispatch({ type: FETCH_FRIENDS_FAILURE, payload: err.response })
         })
 }
