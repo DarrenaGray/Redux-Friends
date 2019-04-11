@@ -15,7 +15,8 @@ export const login = creds => dispatch => {
         .post(`${baseUrl}/api/login`, creds)
         .then(res => {
             console.log(res)
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+            localStorage.setItem('token', res.data.payload)
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
         })
         .catch(err => {
             console.log(err)
@@ -26,13 +27,18 @@ export const login = creds => dispatch => {
 export const getFriends = () => dispatch => {
     dispatch({ type: FETCH_FRIENDS_START })
     axios
-        .get(`${baseUrl}/api/friends`)
+        .get(`${baseUrl}/api/friends`, {
+            headers: { Authorization: localStorage.getItem('token') }
+        })
         .then(res => {
             console.log(res)
             dispatch({ type: FETCH_FRIENDS_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            console.log(err)
-            dispatch({ type: FETCH_FRIENDS_FAILURE, payload: err })
+            console.log(err.response)
+            if (err.response.status === 403) {
+                localStorage.removeItem('token');
+            }
+            dispatch({ type: FETCH_FRIENDS_FAILURE, payload: err.response })
         })
 }
