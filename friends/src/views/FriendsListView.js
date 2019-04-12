@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getFriends, deleteFriend } from './../actions';
 
 import FriendsList from '../components/FriendsList';
+import FriendForm from '../components/FriendForm';
 
 
 class FriendsListview extends React.Component {
@@ -21,6 +22,7 @@ class FriendsListview extends React.Component {
             <div>
                 <h1>Friends</h1>
                 <FriendsList friends={this.props.friends} deleteFriend={this.deleteFriend}/>
+                <FriendForm friends={this.props.friends}/>
             </div>
         )
     }
