@@ -4,8 +4,8 @@ const FriendsList = props => {
 
     return (
         <div>
-            {props.friends.map(friend => (
-                <div key={friend.id}>
+            {props.friends.map((friend, index) => (
+                <div key={index}>
                     <h3>{friend.name}</h3>
                     <p>Age: {friend.age}</p>
                     <p>Email: {friend.email}</p>
