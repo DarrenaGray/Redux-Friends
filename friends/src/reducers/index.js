@@ -8,7 +8,7 @@ const initialState = {
     loggingIn: false,
     savingFriends: false,
     updatingFriend: false,
-    error: null
+    error: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 fetchingFriends: false,
-                error: action.payload
+                error: ''
             }
         default:
             return state;
